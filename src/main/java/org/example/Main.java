@@ -14,12 +14,13 @@ public class Main {
         clientexd.verInformacion();
         Ejecutivo1.VerCuentasAgregadas();*/
 
-       Conexion.getInstance();
-        //Cliente cliente21= new Cliente("12.111.111-1","dou","xd","xdd");
-        //Ejecutivo1.AgregarCuentaCorriente(clientexd,"12.111.111-1","dou","xddd","xd@xd","2.222.222-2");
-        Ejecutivo1.EliminarCuenta("11.111.111-1");
-       // new Conexion().uptadeUsuario("11.111.111-1","mamaguevo","alli","xddd");
-       // Ejecutivo1.MostrarClientes("2.222.222-2");
-        //cliente21.verCuentas();
+
+        Cliente cliente4= new Cliente("3.333.333-3","elias","xd","xdd");
+        //Ejecutivo1.AgregarCuentaCorriente(cliente4,"3.333.333-3","elias","xddd","xd@xd");
+        Ejecutivo1.AgregarCuentaAhorro(cliente4,"3.333.333-3","elias","xd","xd@gmail.com");
+       // Ejecutivo1.EliminarCuenta("12.111.111-1");
+        //Ejecutivo1.ActualizarCliente("11.111.111-1","andres","venezuela","mamaguevo@gmail.com");
+       // Ejecutivo1.MostrarClientes();
+       // cliente4.verCuentas();
     }
 }

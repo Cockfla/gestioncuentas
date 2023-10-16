@@ -9,7 +9,6 @@ public class Cliente extends Persona {
     public Cliente(String rut, String nombre,String Direccion,String Correo) {
         super(rut, nombre);
         this.cuentas = new ArrayList<>();
-        new Conexion().insertCliente(rut,nombre,Direccion,Correo);
     }
 
     public void agregarCuenta(Cuenta cuenta) {
@@ -28,7 +27,7 @@ public class Cliente extends Persona {
 
     }
     public void verCuentas(){
-        new Conexion().MostrarCuentasCliente(getRut());
+        Conexion.getInstance().MostrarCuentasCliente(getRut());
     }
 }
 

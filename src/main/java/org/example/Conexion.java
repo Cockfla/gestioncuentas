@@ -12,7 +12,7 @@ public class Conexion {
     public String password="";
     private static Connection conn=null;
     private static Conexion instancia;
-    public Conexion() {
+    private Conexion() {
     }
     public static Conexion getInstance() {
         if (instancia == null) {
@@ -214,7 +214,7 @@ public class Conexion {
         }
     }
 
-    public void uptadeUsuario(String RUT,String nombre, String Direccion,String Correo){
+    public void uptadeCliente(String RUT,String nombre, String Direccion,String Correo){
         try {
             abrirConexion();
             PreparedStatement statement=null;
