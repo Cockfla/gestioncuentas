@@ -2,8 +2,8 @@ package org.example;
 
 public class CuentaAhorro extends Cuenta{
     public boolean active;
-    public CuentaAhorro(String ID, String nombre, String rut, String direccion, String correo,float saldo) {
-        super(ID, nombre, rut, direccion, correo,saldo);
+    public CuentaAhorro(String ID, String nombre, String rut, String direccion, String correo) {
+        super(ID, nombre, rut, direccion, correo);
         if (saldo>=10000){
             this.active = true;
         }else{

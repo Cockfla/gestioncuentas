@@ -10,13 +10,12 @@ public class Cuenta {
     protected int numeroConsignaciones=0;
     protected int numeroRetiros=0;
 
-    public Cuenta(String ID, String nombre, String rut, String direccion, String correo,float saldo){
+    public Cuenta(String ID, String nombre, String rut, String direccion, String correo){
         this.ID=ID;
         this.nombre=nombre;
         this.rut=rut;
         this.direccion=direccion;
         this.correo=correo;
-        this.saldo=saldo;
     }
 
     public String getRut() {
@@ -44,6 +43,7 @@ public class Cuenta {
             //System.out.println("La cantidad a retirar excede el saldo actual");
         }
     }
+
 
     public void mostrarSaldo(){
         System.out.println("El saldo de la cuenta es "+this.saldo);

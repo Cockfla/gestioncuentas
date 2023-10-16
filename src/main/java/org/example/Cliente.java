@@ -6,9 +6,10 @@ import java.util.List;
 public class Cliente extends Persona {
     private List<Cuenta> cuentas;
 
-    public Cliente(String rut, String nombre) {
+    public Cliente(String rut, String nombre,String Direccion,String Correo) {
         super(rut, nombre);
         this.cuentas = new ArrayList<>();
+        new Conexion().insertCliente(rut,nombre,Direccion,Correo);
     }
 
     public void agregarCuenta(Cuenta cuenta) {
@@ -24,5 +25,10 @@ public class Cliente extends Persona {
            }else{
             System.out.println("No se ha asignado ninguna cuenta a este cliente");
         }
+
+    }
+    public void verCuentas(){
+        new Conexion().MostrarCuentasCliente(getRut());
     }
 }
+

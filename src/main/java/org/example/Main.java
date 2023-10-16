@@ -3,10 +3,9 @@ package org.example;
 
 public class Main {
     public static void main(String[] args) {
-    /*Ejecutivo Ejecutivo1=new Ejecutivo("hola","33333");
+    Ejecutivo Ejecutivo1=new Ejecutivo("2.222.222-2","xd");
 
-    Cliente Cliente1=new Cliente("21.315.211-4","Elias");
-    Ejecutivo1.AgregarCuentaCorriente(Cliente1,"21.315.211-4","Elias","xd","sd",5000);
+    /*Ejecutivo1.AgregarCuentaCorriente(Cliente1,"21.315.211-4","Elias","xd","sd",5000);
     Ejecutivo1.AgregarCuentaAhorro(Cliente1,"21.315.211-4","xddd","dddd","ddd",20000);
     Cliente1.verInformacion();
 
@@ -15,7 +14,12 @@ public class Main {
         clientexd.verInformacion();
         Ejecutivo1.VerCuentasAgregadas();*/
 
-        Conexion.getInstance();
-        new Conexion().abrirConexion();
+       Conexion.getInstance();
+        Cliente cliente21= new Cliente("12.111.111-1","dou","xd","xdd");
+        //Ejecutivo1.AgregarCuentaCorriente(clientexd,"12.111.111-1","dou","xddd","xd@xd","2.222.222-2");
+       // Ejecutivo1.EliminarCliente("21.315.211-4");
+       // new Conexion().uptadeUsuario("11.111.111-1","mamaguevo","alli","xddd");
+       // Ejecutivo1.MostrarClientes("2.222.222-2");
+        cliente21.verCuentas();
     }
 }

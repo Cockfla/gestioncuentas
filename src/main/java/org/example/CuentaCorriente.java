@@ -2,8 +2,8 @@ package org.example;
 
 public class CuentaCorriente extends Cuenta{
     public float sobregiro;
-    public CuentaCorriente(String ID, String nombre, String rut, String direccion, String correo,float saldo) {
-        super(ID, nombre, rut, direccion, correo,saldo);
+    public CuentaCorriente(String ID, String nombre, String rut, String direccion, String correo) {
+        super(ID, nombre, rut, direccion, correo);
     }
     public void consignar(float cantidad){
         float residuo = cantidad-this.sobregiro ;

@@ -45,15 +45,69 @@ public class Conexion {
         }
 
     }
-    public void insertCliente(int ID,String nombre,String clave){
+
+    public void insertCliente(String RUT,String NOMBRE,String DIRECCION,String CORREO){
         try {
             abrirConexion();
             PreparedStatement statement=null;
-            String consultaSql = "INSERT INTO CLIENTE(id,nombre,clave) VALUES (?,?,?)";
+            String consultaSql = "INSERT INTO CLIENTE(RUT,NOMBRE,DIRECCION,CORREO) VALUES (?,?,?,?)";
             statement = conn.prepareStatement(consultaSql);
-            statement.setInt(1,ID);
-            statement.setString(2,nombre);
-            statement.setString(3,clave);
+            statement.setString(1,RUT);
+            statement.setString(2,NOMBRE);
+            statement.setString(3,DIRECCION);
+            statement.setString(4,CORREO);
+
+            int filasAfectadas=statement.executeUpdate();
+
+            if (filasAfectadas>0){
+                System.out.println("Inserción exitosa. Filas afectadas: "+filasAfectadas);
+            }else{
+                System.out.println("Inserción fallida");
+            }
+
+        }catch (SQLException e){
+            System.out.println("Error al ejecutar la inserción"+e.getMessage());
+        }finally {
+            cerrarConexion();
+        }
+
+    }
+    public void insertEjecutiva(String RUT,String NOMBRE){
+        try {
+            abrirConexion();
+            PreparedStatement statement=null;
+            String consultaSql = "INSERT INTO EJECUTIVA(RUT,NOMBRE) VALUES (?,?)";
+            statement = conn.prepareStatement(consultaSql);
+            statement.setString(1,RUT);
+            statement.setString(2,NOMBRE);
+
+            int filasAfectadas=statement.executeUpdate();
+
+            if (filasAfectadas>0){
+                System.out.println("Inserción exitosa. Filas afectadas: "+filasAfectadas);
+            }else{
+                System.out.println("Inserción fallida");
+            }
+
+        }catch (SQLException e){
+            System.out.println("Error al ejecutar la inserción"+e.getMessage());
+        }finally {
+            cerrarConexion();
+        }
+
+    }
+    public void insertCuentaAhorro(String num,String RutCliente,String nombre, String RutEjecutiva){
+        try {
+            abrirConexion();
+            String TipoCuenta= "Cuenta de Ahorro";
+            PreparedStatement statement=null;
+            String consultaSql = "INSERT INTO CUENTA(NUM,RutCliente,Nombre,RutEjecutiva,TipoCuenta) VALUES (?,?,?,?,?)";
+            statement = conn.prepareStatement(consultaSql);
+            statement.setString(1,num);
+            statement.setString(2,RutCliente);
+            statement.setString(3,nombre);
+            statement.setString(4,RutEjecutiva);
+            statement.setString(5,TipoCuenta);
 
             int filasAfectadas=statement.executeUpdate();
 
@@ -69,18 +123,46 @@ public class Conexion {
             cerrarConexion();
         }
     }
+    public void insertCuentaCorriente(String num,String RutCliente,String nombre, String RutEjecutiva){
+        try {
+            abrirConexion();
+            String TipoCuenta= "Cuenta Corriente";
+            PreparedStatement statement=null;
+            String consultaSql = "INSERT INTO CUENTA(NUM,RutCliente,Nombre,RutEjecutiva,TipoCuenta) VALUES (?,?,?,?,?)";
+            statement = conn.prepareStatement(consultaSql);
+            statement.setString(1,num);
+            statement.setString(2,RutCliente);
+            statement.setString(3,nombre);
+            statement.setString(4,RutEjecutiva);
+            statement.setString(5,TipoCuenta);
 
-    public void listarUsuario(){
+            int filasAfectadas=statement.executeUpdate();
+
+            if (filasAfectadas>0){
+                System.out.println("Inserción exitosa. Filas afectadas: "+filasAfectadas);
+            }else{
+                System.out.println("Inserción fallida");
+            }
+
+        }catch (SQLException e){
+            System.out.println("Error al ejecutar la inserción"+e.getMessage());
+        }finally {
+            cerrarConexion();
+        }
+    }
+    public void MostrarCuentasCliente(String rut){
         try{
             abrirConexion();
             Statement statement= conn.createStatement();
-            String consulta="Select * from usuario";
+            String consulta="Select * from CUENTA WHERE RutCliente='"+rut+"'";
             ResultSet resultado= statement.executeQuery(consulta);
             while (resultado.next()){
-                int id=resultado.getInt("id");
-                String nombre=resultado.getString("nombre");
-                String clave=resultado.getString("clave");
-                System.out.println("id: "+id+" nombre: "+nombre+" clave: "+clave);
+                String NUM=resultado.getString("num");
+                String RutCliente=resultado.getString("RutCliente");
+                String Nombre=resultado.getString("Nombre");
+                String RutEjecutiva=resultado.getString("RutEjecutiva");
+                String TipoCuenta=resultado.getString("TipoCuenta");
+                System.out.println("Numéro de Cuenta: "+NUM+" Rut Cliente : "+RutCliente+" Nombre Cliente: "+Nombre+" Rut Ejecutiva: "+RutEjecutiva+" Tipo de Cuenta: "+TipoCuenta);
             }
 
         }catch (SQLException e){
@@ -89,35 +171,59 @@ public class Conexion {
             cerrarConexion();
         }
     }
-    public void eliminarUsuario(int ID){
+
+    public void MostrarCuentasAgregadas(String rut){
         try{
             abrirConexion();
-            PreparedStatement statement=null;
-            String consulta= "DELETE FROM usuario where ID="+ID;
-            statement= conn.prepareStatement(consulta);
-            int filasAfectadas= statement.executeUpdate();
-            if(filasAfectadas>0){
-                System.out.println("Eliminado exitosamente.Filas afectadas: "+filasAfectadas);
-
-            }else{
-                System.out.println("No se ha podido eliminar");
+            Statement statement= conn.createStatement();
+            String consulta="Select * from CUENTA WHERE RutEjecutiva='"+rut+"'";
+            ResultSet resultado= statement.executeQuery(consulta);
+            while (resultado.next()){
+                String NUM=resultado.getString("num");
+                String RutCliente=resultado.getString("RutCliente");
+                String Nombre=resultado.getString("Nombre");
+                String RutEjecutiva=resultado.getString("RutEjecutiva");
+                String TipoCuenta=resultado.getString("TipoCuenta");
+                System.out.println("Numéro de Cuenta: "+NUM+" Rut Cliente : "+RutCliente+" Nombre Cliente: "+Nombre+" Rut Ejecutiva: "+RutEjecutiva+" Tipo de Cuenta: "+TipoCuenta);
             }
 
         }catch (SQLException e){
-            System.out.println("Error al ejecutar al eliminar"+e.getMessage());
-        }
-        finally {
+            System.out.println("No se ha podido listar a los usuarios"+e.getMessage());
+        }finally {
             cerrarConexion();
         }
     }
-    public void uptadeUsuario(int ID,String nombre, String clave){
+    public void deleteCliente(String rut) {
+        try {
+            abrirConexion();
+            PreparedStatement statement = null;
+            String consulta = "DELETE FROM CLIENTE WHERE RUT=?";
+            statement = conn.prepareStatement(consulta);
+            statement.setString(1, rut);
+
+            int filasAfectadas = statement.executeUpdate();
+            if (filasAfectadas > 0) {
+                System.out.println("Eliminado exitosamente. Filas afectadas: " + filasAfectadas);
+            } else {
+                System.out.println("No se ha podido eliminar");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al ejecutar al eliminar" + e.getMessage());
+        } finally {
+            cerrarConexion();
+        }
+    }
+
+    public void uptadeUsuario(String RUT,String nombre, String Direccion,String Correo){
         try {
             abrirConexion();
             PreparedStatement statement=null;
-            String consulta= "UPDATE usuario SET nombre=?,clave=? WHERE ID="+ID;
+            String consulta= "UPDATE CLIENTE SET NOMBRE=?,DIRECCION=?,CORREO=? WHERE RUT=?";
             statement = conn.prepareStatement(consulta);
             statement.setString(1,nombre);
-            statement.setString(2,clave);
+            statement.setString(2,Direccion);
+            statement.setString(3,Correo);
+            statement.setString(4,RUT);
             int filasAfectadas=statement.executeUpdate();
             if (filasAfectadas>0){
                 System.out.println("Datos de usuario actualizados correctamente. Filas afectadas: "+filasAfectadas);

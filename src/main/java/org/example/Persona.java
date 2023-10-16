@@ -15,4 +15,8 @@ public class Persona implements IPersona {
         System.out.println(rut);
         System.out.println(nombre);
     }
+
+    public String getRut() {
+        return rut;
+    }
 }
