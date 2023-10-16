@@ -58,9 +58,9 @@ public class Ejecutivo extends Persona{
             System.out.println("------------------------");
         }
     }
-    public void EliminarCliente(String rut){
+    public void EliminarCuenta(String rut){
         try {
-            new Conexion().deleteCliente(rut);
+            new Conexion().deleteCuenta(rut);
         }catch (Error e){
             System.out.println("Error al eliminar al cliente "+e.getMessage());
         }

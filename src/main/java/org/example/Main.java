@@ -15,11 +15,11 @@ public class Main {
         Ejecutivo1.VerCuentasAgregadas();*/
 
        Conexion.getInstance();
-        Cliente cliente21= new Cliente("12.111.111-1","dou","xd","xdd");
+        //Cliente cliente21= new Cliente("12.111.111-1","dou","xd","xdd");
         //Ejecutivo1.AgregarCuentaCorriente(clientexd,"12.111.111-1","dou","xddd","xd@xd","2.222.222-2");
-       // Ejecutivo1.EliminarCliente("21.315.211-4");
+        Ejecutivo1.EliminarCuenta("11.111.111-1");
        // new Conexion().uptadeUsuario("11.111.111-1","mamaguevo","alli","xddd");
        // Ejecutivo1.MostrarClientes("2.222.222-2");
-        cliente21.verCuentas();
+        //cliente21.verCuentas();
     }
 }

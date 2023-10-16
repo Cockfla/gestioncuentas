@@ -193,11 +193,11 @@ public class Conexion {
             cerrarConexion();
         }
     }
-    public void deleteCliente(String rut) {
+    public void deleteCuenta(String rut) {
         try {
             abrirConexion();
             PreparedStatement statement = null;
-            String consulta = "DELETE FROM CLIENTE WHERE RUT=?";
+            String consulta = "DELETE FROM CUENTA WHERE RutCliente=?";
             statement = conn.prepareStatement(consulta);
             statement.setString(1, rut);
 
