@@ -14,13 +14,13 @@ public class Main {
         clientexd.verInformacion();
         Ejecutivo1.VerCuentasAgregadas();*/
 
-
-        Cliente cliente4= new Cliente("3.333.333-3","elias","xd","xdd");
-        //Ejecutivo1.AgregarCuentaCorriente(cliente4,"3.333.333-3","elias","xddd","xd@xd");
-        Ejecutivo1.AgregarCuentaAhorro(cliente4,"3.333.333-3","elias","xd","xd@gmail.com");
-       // Ejecutivo1.EliminarCuenta("12.111.111-1");
-        //Ejecutivo1.ActualizarCliente("11.111.111-1","andres","venezuela","mamaguevo@gmail.com");
-       // Ejecutivo1.MostrarClientes();
-       // cliente4.verCuentas();
+        Cliente cliente=new Cliente("3.333.333-3","bruno","xd","xd");
+        //Ejecutivo1.AgregarCuentaCorriente(cliente5,"4.444.444-4","bruno","xddddd","xdd");
+        //Ejecutivo1.AgregarCuentaAhorro(cliente5,"4.444.444-4","bruno","xdddddd","xdd");
+       //Ejecutivo1.EliminarCuentaCorriente("4.444.444-4");
+       //Ejecutivo1.EliminarCuentaAhorro("4.444.444-4");
+       // Ejecutivo1.ActualizarCliente("11.111.111-1","andres","venezuela","mamaguevo@gmail.com");
+      // Ejecutivo1.MostrarClientes();
+        cliente.verCuentas();
     }
 }

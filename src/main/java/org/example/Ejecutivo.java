@@ -16,7 +16,6 @@ public class Ejecutivo extends Persona{
     public void AgregarCliente(String rut,String nombre,String Direccion, String Correo){
         try{
             Cliente cliente=new Cliente(rut,nombre,Direccion,Correo);
-            Conexion.getInstance().insertCliente(rut,nombre,Direccion,Correo);
             System.out.println("Se ha agregado correctamente al cliente");
         }catch (Error e){
             System.out.println("Error al agregar cliente"+e.getMessage());
@@ -56,9 +55,16 @@ public class Ejecutivo extends Persona{
             System.out.println("------------------------");
         }
     }
-    public void EliminarCuenta(String rut){
+    public void EliminarCuentaCorriente(String rut){
         try {
-            Conexion.getInstance().deleteCuenta(rut);
+            Conexion.getInstance().deleteCuentaCorriente(rut);
+        }catch (Error e){
+            System.out.println("Error al eliminar al cliente "+e.getMessage());
+        }
+    }
+    public void EliminarCuentaAhorro(String rut){
+        try {
+            Conexion.getInstance().deleteCuentaAhorro(rut);
         }catch (Error e){
             System.out.println("Error al eliminar al cliente "+e.getMessage());
         }

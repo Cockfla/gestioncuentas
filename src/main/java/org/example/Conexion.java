@@ -162,7 +162,7 @@ public class Conexion {
                 String Nombre=resultado.getString("Nombre");
                 String RutEjecutiva=resultado.getString("RutEjecutiva");
                 String TipoCuenta=resultado.getString("TipoCuenta");
-                System.out.println("Numéro de Cuenta: "+NUM+" Rut Cliente : "+RutCliente+" Nombre Cliente: "+Nombre+" Rut Ejecutiva: "+RutEjecutiva+" Tipo de Cuenta: "+TipoCuenta);
+                System.out.println("Numéro de Cuenta: "+NUM+" | Rut Cliente : "+RutCliente+" | Nombre Cliente: "+Nombre+" | Rut Ejecutiva: "+RutEjecutiva+" | Tipo de Cuenta: "+TipoCuenta);
             }
 
         }catch (SQLException e){
@@ -184,7 +184,7 @@ public class Conexion {
                 String Nombre=resultado.getString("Nombre");
                 String RutEjecutiva=resultado.getString("RutEjecutiva");
                 String TipoCuenta=resultado.getString("TipoCuenta");
-                System.out.println("Numéro de Cuenta: "+NUM+" Rut Cliente : "+RutCliente+" Nombre Cliente: "+Nombre+" Rut Ejecutiva: "+RutEjecutiva+" Tipo de Cuenta: "+TipoCuenta);
+                System.out.println("Numéro de Cuenta: "+NUM+" | Rut Cliente : "+RutCliente+" | Nombre Cliente: "+Nombre+" | Rut Ejecutiva: "+RutEjecutiva+" | Tipo de Cuenta: "+TipoCuenta);
             }
 
         }catch (SQLException e){
@@ -193,13 +193,35 @@ public class Conexion {
             cerrarConexion();
         }
     }
-    public void deleteCuenta(String rut) {
+    public void deleteCuentaCorriente(String rut) {
         try {
             abrirConexion();
             PreparedStatement statement = null;
-            String consulta = "DELETE FROM CUENTA WHERE RutCliente=?";
+            String consulta = "DELETE FROM CUENTA WHERE RutCliente=? AND TipoCuenta=?";
             statement = conn.prepareStatement(consulta);
             statement.setString(1, rut);
+            statement.setString(2, "Cuenta Corriente");
+
+            int filasAfectadas = statement.executeUpdate();
+            if (filasAfectadas > 0) {
+                System.out.println("Eliminado exitosamente. Filas afectadas: " + filasAfectadas);
+            } else {
+                System.out.println("No se ha podido eliminar");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al ejecutar al eliminar" + e.getMessage());
+        } finally {
+            cerrarConexion();
+        }
+    }
+    public void deleteCuentaAhorro(String rut) {
+        try {
+            abrirConexion();
+            PreparedStatement statement = null;
+            String consulta = "DELETE FROM CUENTA WHERE RutCliente=? AND TipoCuenta=?";
+            statement = conn.prepareStatement(consulta);
+            statement.setString(1, rut);
+            statement.setString(2, "Cuenta de Ahorro");
 
             int filasAfectadas = statement.executeUpdate();
             if (filasAfectadas > 0) {
@@ -240,5 +262,53 @@ public class Conexion {
 
         }
     }
+    public boolean existeClienteEnBaseDeDatos(String rut) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        boolean existeCliente = false;
+
+        try {
+
+            connection = Conexion.getInstance().abrirConexion();
+
+            String consultaSql = "SELECT COUNT(*) FROM CLIENTE WHERE RUT = ?";
+            preparedStatement = connection.prepareStatement(consultaSql);
+            preparedStatement.setString(1, rut);
+
+
+            resultSet = preparedStatement.executeQuery();
+
+
+            if (resultSet.next() && resultSet.getInt(1) > 0) {
+                existeCliente = true;
+            }
+        } catch (SQLException e) {
+
+            System.err.println("Error al verificar la existencia del cliente en la base de datos: " + e.getMessage());
+        } finally {
+
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                Conexion.getInstance().cerrarConexion();
+            }
+        }
+
+        return existeCliente;
+    }
+
 
 }

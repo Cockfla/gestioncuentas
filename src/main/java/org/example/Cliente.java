@@ -9,6 +9,9 @@ public class Cliente extends Persona {
     public Cliente(String rut, String nombre,String Direccion,String Correo) {
         super(rut, nombre);
         this.cuentas = new ArrayList<>();
+        if (!Conexion.getInstance().existeClienteEnBaseDeDatos(rut)) {
+            Conexion.getInstance().insertCliente(rut, nombre, Direccion, Correo);
+        }
     }
 
     public void agregarCuenta(Cuenta cuenta) {
@@ -26,8 +29,16 @@ public class Cliente extends Persona {
         }
 
     }
+
+    @Override
+    public String getRut() {
+        return super.getRut();
+    }
+
     public void verCuentas(){
         Conexion.getInstance().MostrarCuentasCliente(getRut());
     }
+
 }
+
 
